@@ -1,6 +1,6 @@
 import random
-from string import capwords
 import time
+from string import capwords
 
 
 class Restaurant:
@@ -23,8 +23,20 @@ class Restaurant:
 
 
 class IceCreamStand(Restaurant):
+    flavors: list[str] = []
+
     def __init__(self, restaurant_name, cuisine_type="ice cream"):
         super().__init__(restaurant_name, cuisine_type)
+
+    def display_flavors(self):
+        if self.flavors:
+            print(f"{self.restaurant_name} has the following flavors:")
+            for flavor in self.flavors:
+                print(f"\t-{flavor}")
+
+    def add_flavors(self, *flavors):
+        for flavor in flavors:
+            self.flavors.append(flavor)
 
 
 def main():
@@ -40,7 +52,7 @@ def main():
     print(f"{little_shop.restaurant_name} has served {little_shop.number_served}")
 
     while little_shop.number_served < 200:
-        serving = random.randint(0,10)
+        serving = random.randint(0, 10)
         difference = 200 - little_shop.number_served
         if difference < serving:
             little_shop.increment_number_served(difference)
@@ -58,6 +70,10 @@ def main():
     frosty.print_number_served()
     frosty.increment_number_served(5)
     frosty.print_number_served()
+    print()
+    delivery = ["chocolate", "mint", "peanut-butter", "mystery"]
+    frosty.add_flavors(*delivery)
+    frosty.display_flavors()
 
 
 if __name__ == "__main__":
